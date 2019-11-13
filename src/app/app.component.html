@@ -1,0 +1,17 @@
+<div style="width: 30%; min-height: 70vh; background-color: #ccc; float:left;;">
+  <app-drag [connectedDropListsIds]="connectedDropListsIds" [item]="item"></app-drag>
+</div>
+
+<div style="width: 70%; min-height: 70vh; background-color: #eee; float:right;">
+  <app-drop [connectedDropListsIds]="connectedDropListsIds" [item]="done" (itemDrop)="onDragDrop($event)" (itemDelete)="onItemDelete($event)"></app-drop>
+</div>
+ 
+<hr />
+
+<!-- <div *ngFor="let id of connectedDropListsIds">{{id}}</div> -->
+<pre>{{done|json}}</pre>
+
+<hr />
+
+<!-- <app-products></app-products> -->
+<!--<app-product></app-product> -->

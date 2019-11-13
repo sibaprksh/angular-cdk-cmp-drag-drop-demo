@@ -1,0 +1,48 @@
+<div cdkDropList
+    class="item-dropzone parent"
+    [id]="parentItemId"
+    [cdkDropListData]="parentItem"
+    [cdkDropListConnectedTo]="allDropListsIds"
+    (cdkDropListDropped)="onDragDrop($event)">
+    <div cdkDrag
+        [id]="item.uId"
+        [cdkDragData]="item"
+        [cdkDragDisabled]="dragDisabled">
+        <div 
+            class="item-drag-handle"
+            cdkDragHandle style="float: right;">
+            <!-- {{item.name}} -->
+            <i *ngIf="!dragDisabled" class="material-icons" title="Drag this item with children">
+                drag_indicator
+            </i>
+            <i *ngIf="!dragDisabled" class="material-icons pointer" (click)="onDelete(item)" title="Delete this item with children">
+                delete
+            </i>
+        </div>
+
+        <ng-template #target></ng-template>
+
+        <div class="item-drag-preview"
+            *cdkDragPreview>
+            {{item.name}} with {{item.children.length}} child item(s)
+        </div>
+    </div>
+
+    
+    <ul cdkDropList
+        class="item-dropzone"
+        [id]="item.uId"
+        [cdkDropListConnectedTo]="connectedDropListsIds"
+        [cdkDropListData]="item"
+        (cdkDropListDropped)="onDragDrop($event)">
+        <li *ngFor="let subItem of item.children">
+            <app-drop [item]="subItem"
+                [parentItem]="item"
+                [connectedDropListsIds]="allDropListsIds"
+                [parentInstance]="currentInstance"              
+                (itemDrop)="onDragDrop($event)"                   
+                (itemDelete)="onDelete(item)">
+            </app-drop>
+        </li>
+    </ul>
+</div>
