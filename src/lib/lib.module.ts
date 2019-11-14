@@ -7,6 +7,7 @@ import { DropComponent } from './drop/drop.component';
   imports: [
     CommonModule
   ],
-  declarations: [DragComponent, DropComponent]
+  declarations: [DragComponent, DropComponent],
+  exports: [DragComponent, DropComponent],
 })
 export class LibModule { }

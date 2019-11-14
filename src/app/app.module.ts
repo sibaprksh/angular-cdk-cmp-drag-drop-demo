@@ -3,8 +3,7 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgModule } from '@angular/core';
-import { DragComponent } from './drag/drag.component';
-import { DropComponent } from './drop/drop.component';
+import { LibModule } from '../lib';
 
 import { ComponentModule } from '../component';
 
@@ -13,14 +12,13 @@ import { ComponentModule } from '../component';
     BrowserModule,
     CommonModule,
     DragDropModule,
-    ComponentModule
+    ComponentModule,
+    LibModule
   ],
   entryComponents: [
   ],
   declarations: [    
-    AppComponent,    
-    DragComponent, 
-    DropComponent
+    AppComponent
   ],
   bootstrap: [
     AppComponent
