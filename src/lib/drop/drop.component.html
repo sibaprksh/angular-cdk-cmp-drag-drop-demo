@@ -7,13 +7,16 @@
     <div cdkDrag
         [id]="item.uId"
         [cdkDragData]="item"
-        [cdkDragDisabled]="dragDisabled">
+        [cdkDragDisabled]="dragDisabled" class="content-data">
         <div 
             class="item-drag-handle"
-            cdkDragHandle style="float: right;">
+            cdkDragHandle style="float: right; opacity: 1">
             <!-- {{item.name}} -->
-            <i *ngIf="!dragDisabled" class="material-icons" title="Drag this item with children">
-                drag_indicator
+            <i *ngIf="!dragDisabled" title="Drag this item with children">
+                <svg width="18px" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                </svg>
             </i>
             <i *ngIf="!dragDisabled" class="material-icons pointer" (click)="onDelete(item)" title="Delete this item with children">
                 delete
