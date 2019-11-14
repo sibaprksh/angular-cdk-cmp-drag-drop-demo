@@ -1,7 +1,7 @@
 import { CdkDragDrop, CdkDragEnter, CdkDragExit, moveItemInArray, copyArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
-import { Item } from './models/item';
 
+import { Item } from '../lib';
 import { components } from '../component';
 
 @Component({
