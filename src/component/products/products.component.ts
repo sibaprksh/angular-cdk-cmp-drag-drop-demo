@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DropComponent } from '../../lib';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent extends DropComponent {
 
   products: Array<any> = [];
   product: Object = {};
   
-  constructor() { }
+  constructor() { super() }
 
   ngOnInit() { 
     this.products = [

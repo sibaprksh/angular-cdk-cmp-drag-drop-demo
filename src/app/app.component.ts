@@ -1,7 +1,7 @@
 import { CdkDragDrop, CdkDragEnter, CdkDragExit, moveItemInArray, copyArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 
-import { Item } from '../lib';
+import { Item, DropComponent } from '../lib';
 import { components } from '../component';
 
 @Component({
@@ -25,11 +25,6 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
-    // this.item.children.push(
-    //   new Item({ name: 'products' }),
-    //   new Item({ name: 'product' })
-    // );
-    //debugger;  
     components.forEach((component)=>{ 
       //debugger;
       this.item.children.push(
@@ -47,6 +42,9 @@ export class AppComponent implements OnInit {
       if(this.isFromDrag(movingItem)) {
         const data = this.getData(movingItem);
         data.children = []; // TODO: Check why nested component is droping
+        if(movingItem.clazz.prototype instanceof DropComponent){
+          data.children.push(new Item({name: 'placeholder'}));
+        }
         const cloneItem = new Item(data);
         event.container.data.children.push(cloneItem); 
       }else{

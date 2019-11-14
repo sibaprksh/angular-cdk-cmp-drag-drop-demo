@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+import { LibModule } from '../lib';
+
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 
@@ -13,7 +15,7 @@ export const components = [
 
 @NgModule({
   imports: [
-    CommonModule, DragDropModule
+    CommonModule, DragDropModule, LibModule
   ],
   declarations: [ProductsComponent, ProductComponent],
   exports: [],

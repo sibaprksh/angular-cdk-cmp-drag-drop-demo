@@ -30,25 +30,14 @@ export class DropComponent {
   }
 
   @Output() itemDrop: EventEmitter<CdkDragDrop<Item>> = new EventEmitter();
-  @Output() itemDelete: EventEmitter<Item> = new EventEmitter();
-
+  
   constructor(private resolver: ComponentFactoryResolver) {
     this.allDropListsIds = [];
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     //debugger;
-    if(this.item && this.item.clazz){ 
-      try{
-        this.loadComponent(this.item);
-      }catch(err){
-        console.warn(err);
-      }      
-    }      
-  }
-
-  public onDragDrop(event: CdkDragDrop<Item, Item>): void {    
-    this.itemDrop.emit(event);
+    this.loadComponent(this.item);
   }
 
   public onDelete(item: Item): void {
@@ -62,6 +51,8 @@ export class DropComponent {
 
   private loadComponent(item: Item) { 
     //debugger; 
+
+    if(!item || !item.clazz) return;
     
     const factory = this.resolver.resolveComponentFactory(item.clazz);
     this.currentInstance = this.target.createComponent(factory).instance; 
@@ -82,7 +73,12 @@ export class DropComponent {
         }
       }
     }
-    
+
+    this.currentInstance.item = item;
+    this.currentInstance.parentItem = this.parentItem;
+    this.currentInstance.connectedDropListsIds = this.connectedDropListsIds;
+    this.currentInstance.parentInstance;
+    this.currentInstance.itemDrop = this.itemDrop;
   }
 
 }
