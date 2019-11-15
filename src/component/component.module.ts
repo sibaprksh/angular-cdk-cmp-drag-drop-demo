@@ -9,7 +9,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 
 export const components = [
-  {clazz: ProductsComponent, dropArea: 1},
+  {clazz: ProductsComponent},
   {clazz: ProductComponent},
 ]
 
