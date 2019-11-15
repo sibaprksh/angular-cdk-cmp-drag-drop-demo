@@ -1,4 +1,4 @@
-<div cdkDropList
+<!-- <div cdkDropList
     class="item-dropzone parent"
     [id]="parentItemId"
     [cdkDropListData]="parentItem"
@@ -49,4 +49,37 @@
           </li>
       </ul>
     </ng-container>
-</div>
+</div> -->
+
+
+
+<!-- {{item|json}} -->
+
+<!-- <div
+  [id]="item.uId"
+  class="item-dropzone"
+  cdkDropList    
+  [cdkDropListData]="item"    
+  [cdkDropListConnectedTo]="listIds"
+  (cdkDropListDropped)="itemDrop.emit($event)">
+    <div class="example-box" *ngFor="let subItem of item.children" cdkDrag [cdkDragData]="subItem">
+      <app-drop [item]="subItem"
+                  [parentItem]="item"
+                  [connectedDropListsIds]="listIds"
+                  [parentInstance]="currentInstance"              
+                  (itemDrop)="itemDrop.emit($event)">
+              </app-drop>
+    </div>
+</div>  -->
+
+
+<div class="example-box" *ngFor="let subItem of item.children">
+  <div class="item-dropzone">
+    <app-drop [item]="subItem"
+        [parentItem]="item"
+        [connectedDropListsIds]="listIds"
+        [parentInstance]="currentInstance"              
+        (itemDrop)="drop($event)">
+    </app-drop>
+  </div>
+  </div>

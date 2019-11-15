@@ -1,5 +1,6 @@
-import { CdkDragDrop, CdkDragEnter, CdkDragExit, moveItemInArray, copyArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragEnter, CdkDragExit, moveItemInArray, copyArrayItem, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
+import * as uuid from 'uuid';
 
 import { Item, DropComponent } from '../lib';
 import { components } from '../component';
@@ -10,6 +11,50 @@ import { components } from '../component';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+    // public get listIds(): string[] {      
+    //   const itemIds = this.getIdsRecursive(this.todoArr).reverse();
+    //   const doneIds = this.getIdsRecursive(this.doneArr).reverse();
+    //   return itemIds.concat(doneIds);   
+    // }
+
+    // todoArr = 
+    //   {
+    //     name: 'Drag', 
+    //     uId: uuid.v4(),
+    //     children : []
+    //   }
+    // ;
+
+    // doneArr = 
+    //   { 
+    //     name: '', 
+    //     uId: uuid.v4(),
+    //     children : [
+    //       {
+    //         name: components[0].clazz.name,
+    //         clazz: components[0].clazz,
+    //         uId: uuid.v4(),
+    //         children : [
+    //           { 
+    //             name: components[1].clazz.name,
+    //             clazz: components[1].clazz,
+    //             uId: uuid.v4(),
+    //             children : [
+    //             ]
+    //           }
+    //         ]
+    //       }
+    //     ] 
+    //   }  
+    // ;
+
+
+    /////////////////////////////
+
+
+
+
   public item: Item;
   public done: Item;
 
@@ -21,7 +66,7 @@ export class AppComponent implements OnInit {
 
   constructor() {
     this.item = new Item({ name: 'Drag' });
-    this.done = new Item({ name: 'Drop Area' });
+    this.done = new Item({ name: 'Drop Area' }); 
   }
 
   public ngOnInit() {
@@ -42,9 +87,10 @@ export class AppComponent implements OnInit {
       if(this.isFromDrag(movingItem)) {
         const data = this.getData(movingItem);
         data.children = []; // TODO: Check why nested component is droping
-        if(movingItem.clazz.prototype instanceof DropComponent){
-          data.children.push(new Item({name: 'placeholder'}));
-        }
+        //if(movingItem.clazz.prototype instanceof DropComponent){
+        // if(movingItem.clazz.name == 'ProductsComponent'){ 
+        //   data.children.push(new Item({name: 'placeholder'}));
+        // }
         const cloneItem = new Item(data);
         event.container.data.children.push(cloneItem); 
       }else{
@@ -92,4 +138,5 @@ export class AppComponent implements OnInit {
     }
     return cloned;
   }
+  
 }
