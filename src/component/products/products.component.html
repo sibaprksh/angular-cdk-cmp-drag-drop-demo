@@ -73,13 +73,65 @@
 </div>  -->
 
 
-<div class="example-box" *ngFor="let subItem of item.children">
-  <div class="item-dropzone">
-    <app-drop [item]="subItem"
-        [parentItem]="item"
-        [connectedDropListsIds]="listIds"
-        [parentInstance]="currentInstance"              
-        (itemDrop)="drop($event)">
-    </app-drop>
-  </div>
-  </div>
+<!-- <div class="example-box" *ngFor="let subItem of item.children">
+  {{subItem|json}}
+</div> -->
+
+
+
+<!-- <div class="example-box item-dropzone" *ngFor="let subItem of item.children" cdkDrag [cdkDragData]="subItem">
+      
+
+      <div
+        [id]="subItem.uId"
+        class="item-dropzone"
+        cdkDropList    
+        [cdkDropListData]="item"    
+        [cdkDropListConnectedTo]="connectedDropListsIds"
+        (cdkDropListDropped)="itemDrop.emit($event)" class="example-list">
+        
+          
+        
+        </div>
+
+
+    </div>
+
+    {{connectedDropListsIds}} -->
+
+
+<!-- pr: {{connectedDropListsIds}}  -->
+
+<!-- {{item|json}} -->
+
+
+<!-- <app-drop [item]="item" (itemDrop)="drop($event)"></app-drop> -->
+
+
+
+	<div *ngFor="let subItem of item.children" class="item-dropzone">
+    {{connectedDropListsIds}} >>>>> {{subItem.uId}}
+    <div cdkDropList [id]="subItem.uId" [cdkDropListConnectedTo]="connectedDropListsIds" [cdkDropListData]="item" (cdkDropListDropped)="onDrop($event)">
+      <div (click)="onDelete(item, subItem)"> 
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="24" viewBox="0 0 24 24" style="fill:#000000;">
+          <path
+            d="M 10.3125 -0.03125 C 8.589844 -0.03125 7.164063 1.316406 7 3 L 2 3 L 2 5 L 6.96875 5 L 6.96875 5.03125 L 17.03125 5.03125 L 17.03125 5 L 22 5 L 22 3 L 17 3 C 16.84375 1.316406 15.484375 -0.03125 13.8125 -0.03125 Z M 10.3125 2.03125 L 13.8125 2.03125 C 14.320313 2.03125 14.695313 2.429688 14.84375 2.96875 L 9.15625 2.96875 C 9.296875 2.429688 9.6875 2.03125 10.3125 2.03125 Z M 4 6 L 4 22.5 C 4 23.300781 4.699219 24 5.5 24 L 18.59375 24 C 19.394531 24 20.09375 23.300781 20.09375 22.5 L 20.09375 6 Z M 7 9 L 8 9 L 8 22 L 7 22 Z M 10 9 L 11 9 L 11 22 L 10 22 Z M 13 9 L 14 9 L 14 22 L 13 22 Z M 16 9 L 17 9 L 17 22 L 16 22 Z">
+          </path>
+        </svg>
+      </div>
+
+      <div cdkDragHandle style="cursor: move;">
+        <svg width="24" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
+          </path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+      </div>
+    </div>
+
+
+		
+
+		<!-- <app-dnd [item]='subItem' (itemDrop)="onDrop($event)"></app-dnd> -->
+	</div>

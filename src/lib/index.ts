@@ -4,3 +4,4 @@ export { DragComponent } from './drag/drag.component';
 export { DropComponent } from './drop/drop.component';
 
 export { Item } from './models/item';
+export { DndService } from './dnd.service';

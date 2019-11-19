@@ -1,5 +1,7 @@
 import * as uuid from 'uuid';
 
+import { DndService } from '../dnd.service';
+
 export class Item {
     name: string;
     clazz: any;
@@ -18,5 +20,7 @@ export class Item {
         this.selector = options.selector;
         this.uId = uuid.v4();
         this.children = options.children || [];
+
+        //DndService.setId(this.uId);
     }    
 }

@@ -2,6 +2,8 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Item } from '../models/item';
 
+import { DndService } from '../dnd.service';
+
 @Component({
   selector: 'app-drag',
   templateUrl: './drag.component.html',
@@ -10,13 +12,8 @@ import { Item } from '../models/item';
 export class DragComponent {
   @Input() item: Item;
   @Input() parentItem?: Item;
-  @Input() public set connectedDropListsIds(ids: string[]) {
-    this.allDropListsIds = ids;
-  }
-  public get connectedDropListsIds(): string[] {
-    return this.allDropListsIds.filter((id) => id !== this.item.uId);
-  }
-  public allDropListsIds: string[];
+  
+  connectedDropListsIds: string[];
 
   public get dragDisabled(): boolean {
     return !this.parentItem;
@@ -30,8 +27,8 @@ export class DragComponent {
   @Output() itemDrop: EventEmitter<CdkDragDrop<Item>> = new EventEmitter();
   @Output() itemDelete: EventEmitter<Item> = new EventEmitter();
 
-  constructor() {
-    this.allDropListsIds = [];
+  constructor(public service : DndService) {
+    this.service.ids.subscribe((ids: string[])=>this.connectedDropListsIds=ids);
   }
 
   public onDragDrop(event: CdkDragDrop<Item, Item>): void {

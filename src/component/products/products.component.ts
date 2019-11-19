@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CdkDragDrop } from "@angular/cdk/drag-drop";
 
-import { DropComponent, Item } from '../../lib';
+import { DropComponent, Item, DndService } from '../../lib';
 
 @Component({
   selector: 'app-products',
@@ -9,23 +10,43 @@ import { DropComponent, Item } from '../../lib';
 })
 export class ProductsComponent {
 
-  @Input() item;
-  @Output() itemDrop;
+  @Input() item: Item;
+  @Output() itemDrop: EventEmitter<any> = new EventEmitter();
+
+  connectedDropListsIds = [];
   currentInstance: any;
 
-  loadPlaceholders() {
+  loadPlaceholders() { 
     if(this.item.children.length == 0){ 
-      this.item.children = [new Item({name: 'placeholder-1'}), new Item({name: 'placeholder-2'})];
+      //this.item.children = [new Item({name: 'placeholder-1'}), new Item({name: 'placeholder-2'})];
+      this.itemDrop.emit({ type: 'placeholder', item: this.item });
+      this.itemDrop.emit({ type: 'placeholder', item: this.item });
+      //this.itemDrop.emit({ type: 'placeholder', item: this.item });
+
+      // setTimeout(()=>{
+      //   this.item.children = [new Item({name: 'placeholder-1'}), new Item({name: 'placeholder-2'})];
+      // },100)
     }
   }
 
-  products: Array<any> = []; 
+  products: Array<any> = [];  
   product: Object = {};
   
-  constructor() {  }
+  constructor(public service : DndService) {
+    this.service.ids.subscribe((ids: string[])=>this.connectedDropListsIds=ids);
+  }
+
+  public onDelete(item: Item, subItem: Item): void {
+    item.children = item.children.filter((item)=>item.uId != subItem.uId)
+  }
+
+  public onDrop(event:  CdkDragDrop<Item>): void { 
+    alert('I am here');
+    this.itemDrop.emit(event); 
+  }
 
   ngOnInit() { 
-    debugger; 
+    //debugger; 
     this.loadPlaceholders();
     this.currentInstance = this;
 
